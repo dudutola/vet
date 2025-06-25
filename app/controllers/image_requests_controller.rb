@@ -51,6 +51,12 @@ end
 
 # less code, plus simple, amelioration
 # drop img
+# analyse more than one image
+#   new model?
+#   has many attached image
+#   image [] permit
+#   update create
+#   form
 # ImageRequest.destroy_all.where()
 # ImageRequest.all.each { |img| img.image.key == nil img.destroy }
 # ImageRequest.all.each { |img| img.destroy if img.image.key == nil  }
