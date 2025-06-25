@@ -1,7 +1,48 @@
-<h2>AI Diagnosis</h2>
+<div class="header">
+    <h1>AI Image Analyzer</h1>
+    <p>Upload an image and get an intelligent description powered by ChatGPT</p>
+</div>
 
-<%= form_with model: @image_request, url:  image_requests_path, local: true do |f| %>
-  <%= f.text_field :title %>
-  <%= f.file_field :image %>
-  <%= f.submit "Analyze image" %>
-<% end %>
+<div class="main-content">
+
+  <div class="upload-section">
+    <%= form_with model: @image_request, local: true, html: { multipart: true } do |f| %>
+      <div class="custom-upload">
+        <div style="margin-left: 80px;">
+          <%= f.file_field :image %>
+        </div>
+        <div class="upload-text">Click or drop to upload an image</div>
+        <div class="upload-subtext">Supports JPG, PNG, GIF up to 10MB</div>
+
+        <div class="file-input">
+          <%= f.text_field :title %>
+        </div>
+
+      </div>
+
+      <div>
+        <%= f.submit "Analyze image" %>
+      </div>
+    <% end %>
+  </div>
+
+
+  <div class="description-section">
+    <div class="description-title">AI Description</div>
+    <div class="description-content" id="descriptionContent">
+      <% if @image_requests.present? %>
+        <% @image_requests.each do |img| %>
+          <div>
+          <%= cl_image_tag img.image.key, width: 300, height: 200, crop: :fill %>
+          <p class="mt-2"><%= img.diagnosis %></p>
+          </div>
+        <% end %>
+      <% end %>
+        Upload an image above to get started. The AI will analyze your image and provide a detailed description.
+    </div>
+</div>
+</div>
+
+<div class="footer">
+  <p>Powered by ChatGPT • Your images are processed securely</p>
+</div>
