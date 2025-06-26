@@ -2,7 +2,7 @@
   <h2>AI Diagnosis</h2>
 
   <% if @image_request.image.attached? %>
-    <%= cl_image_tag @image_request.image.key, width: 300, height: 200, crop: :fit %>
+    <%= cl_image_tag @image_request.image.key, width: 300, height: 200, crop: :fill %>
     <p><%= @image_request.diagnosis || "No diagnosis available" %></p>
   <% end %>
 
