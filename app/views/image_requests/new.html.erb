@@ -6,7 +6,7 @@
 <div class="main-content">
 
   <div class="upload-section">
-    <%= form_with model: @image_request, local: true, html: { multipart: true } do |f| %>
+    <%= form_with model: @image_request, local: true, html: { multipart: true }, data: { controller: "loading", action: "submit->loading#showSpinner" } do |f| %>
       <div class="custom-upload">
         <div style="margin-left: 80px;">
           <%= f.file_field :image, required: true %>
@@ -22,6 +22,9 @@
       <div>
         <%= f.submit "Analyze image" %>
       </div>
+
+      <div data-loading-target="spinner" class="spinner hidden mt-2"></div>
+      <p data-loading-target="text" class="loading-text hidden mt-2">Analizing image... Please wait</p>
     <% end %>
   </div>
 
