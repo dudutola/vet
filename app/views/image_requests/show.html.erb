@@ -1,5 +1,10 @@
-<h2>AI Diagnosis</h2>
+<div class="p-4">
+  <h2>AI Diagnosis</h2>
 
-<p><%= @image_request.diagnosis %></p>
+  <% if @image_request.attached? %>
+    <%= cl_image_tag @image_request.image.key, width: 300, height: 200, crop: :fill %>
+    <p><%= @image_request.diagnosis || "No diagnosis available" %></p>
+  <% end %>
 
-<%= link_to "new diag", new_image_request_path %>
+  <%= link_to "new diag", new_image_request_path %>
+</div>

@@ -14,7 +14,7 @@ class ImageRequestsController < ApplicationController
     if @image_request.save
       diagnosis = analyze_image(@image_request.image.url)
       @image_request.update(diagnosis: diagnosis)
-      # redirect_to @image_request, notice: "done done"
+      redirect_to @image_request, notice: "done done"
     else
       render :new
     end
@@ -51,8 +51,6 @@ end
 
 # less code, plus simple, amelioration
 # drop img
-# remove redirection to show
-# problem with else showing text
 # analyse more than one image
 #   new model?
 #   has many attached image

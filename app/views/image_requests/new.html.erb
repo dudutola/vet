@@ -9,15 +9,14 @@
     <%= form_with model: @image_request, local: true, html: { multipart: true } do |f| %>
       <div class="custom-upload">
         <div style="margin-left: 80px;">
-          <%= f.file_field :image %>
+          <%= f.file_field :image, required: true %>
         </div>
-        <div class="upload-text">Click or drop to upload an image</div>
+        <%# <div class="upload-text">Click or drop to upload an image</div> %>
         <div class="upload-subtext">Supports JPG, PNG, GIF up to 10MB</div>
 
         <div class="file-input">
           <%= f.text_field :title %>
         </div>
-
       </div>
 
       <div>
@@ -30,12 +29,16 @@
   <div class="description-section">
     <div class="description-title">AI Description</div>
     <div class="description-content" id="descriptionContent">
-      <% if @image_requests.present? %>
+      <% if @image_requests.present?  %>
         <% @image_requests.each do |img| %>
-          <div>
-          <%= cl_image_tag img.image.key, width: 300, height: 200, crop: :fill %>
-          <p class="mt-2"><%= img.diagnosis %></p>
-          </div>
+          <% if img.image.attached? %>
+            <%= link_to image_request_path(img) do %>
+              <div>
+                <%= cl_image_tag img.image.key, width: 300, height: 200, crop: :fill %>
+                <p class="mt-2"><%= img.diagnosis.presence || "No diagnosis available" %></p>
+              </div>
+            <% end %>
+          <% end %>
         <% end %>
       <% else %>
         Upload an image above to get started. The AI will analyze your image and provide a detailed description.
